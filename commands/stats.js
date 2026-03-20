@@ -93,11 +93,16 @@ module.exports = {
             }
             if (entry.queueType === 'RANKED_FLEX_SR') {
               const tier = TIERS[entry.tier] || entry.tier;
-              embed.addFields({ name: '👥 Flex', value: `**${tier} ${entry.rank}** — ${entry.leaguePoints} LP`, inline: false });
+              const winrate = Math.round((entry.wins / (entry.wins + entry.losses)) * 100);
+              embed.addFields({ name: '👥 Flex', value: `**${tier} ${entry.rank}** — ${entry.leaguePoints} LP — WR: ${winrate}%`, inline: false });
             }
           }
+          // Si aucune ranked trouvée
+          if (!rankRes.data.some(e => e.queueType === 'RANKED_SOLO_5x5')) {
+            embed.addFields({ name: '⚔️ Solo/Duo', value: 'Non classé cette saison', inline: true });
+          }
         } else {
-          embed.addFields({ name: '⚔️ Rang', value: 'Non classé', inline: true });
+          embed.addFields({ name: '⚔️ Rang', value: `Non classé (${rankRes.status})`, inline: true });
         }
 
         embed.setFooter({ text: 'League of Legends • EUW' }).setTimestamp();
