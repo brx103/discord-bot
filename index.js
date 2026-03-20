@@ -25,6 +25,7 @@ const autoresponse = require('./commands/autoresponse');
 const annonces     = require('./commands/annonces');
 const coach        = require('./commands/coach');
 const boosts       = require('./commands/boosts');
+const stats        = require('./commands/stats');
 
 const PREFIX = '!';
 
@@ -136,12 +137,13 @@ client.on('messageCreate', async (message) => {
     annonces:   ['setup-annonces', 'annonce'],
     coach:      ['setup-coach', 'coach'],
     boosts:     ['setup-boosts', 'boosts'],
+    stats:      ['stats'],
   };
 
   const handlers = {
     general, moderation, music, guides, tierlist, tickets, levels,
     sondage, giveaway, memes, roles, reputation, quiz, reglement,
-    logs, defis, evenements, warn, annonces, coach, boosts,
+    logs, defis, evenements, warn, annonces, coach, boosts, stats,
   };
 
   try {
