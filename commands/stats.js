@@ -81,6 +81,7 @@ module.exports = {
           .setThumbnail(`https://ddragon.leagueoflegends.com/cdn/14.1.1/img/profileicon/${summoner.profileIconId}.png`)
           .addFields({ name: '🏆 Niveau', value: `**${summoner.summonerLevel}**`, inline: true });
 
+        console.log('Rank data:', JSON.stringify(rankRes.data));
         if (rankRes.status === 200 && rankRes.data.length > 0) {
           for (const entry of rankRes.data) {
             if (entry.queueType === 'RANKED_SOLO_5x5') {
