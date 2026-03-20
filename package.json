@@ -4,7 +4,8 @@
   "description": "Bot Discord avec commandes, modération, bienvenue et musique",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "npm install"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.80.0",
