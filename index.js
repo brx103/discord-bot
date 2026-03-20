@@ -24,6 +24,7 @@ const warn         = require('./commands/warn');
 const autoresponse = require('./commands/autoresponse');
 const annonces     = require('./commands/annonces');
 const coach        = require('./commands/coach');
+const boosts       = require('./commands/boosts');
 
 const PREFIX = '!';
 
@@ -84,6 +85,13 @@ client.on('guildMemberAdd', async (member) => {
   channel.send({ embeds: [embed] });
 });
 
+// ─── Boost détection ────────────────────────────────────────
+client.on('guildMemberUpdate', (oldMember, newMember) => {
+  if (!oldMember.premiumSince && newMember.premiumSince) {
+    boosts.handleBoost(newMember);
+  }
+});
+
 // ─── Boutons ────────────────────────────────────────────────
 client.on('interactionCreate', async (interaction) => {
   if (!interaction.isButton()) return;
@@ -127,12 +135,13 @@ client.on('messageCreate', async (message) => {
     warn:       ['warn', 'warns', 'clearwarns'],
     annonces:   ['setup-annonces', 'annonce'],
     coach:      ['setup-coach', 'coach'],
+    boosts:     ['setup-boosts', 'boosts'],
   };
 
   const handlers = {
     general, moderation, music, guides, tierlist, tickets, levels,
     sondage, giveaway, memes, roles, reputation, quiz, reglement,
-    logs, defis, evenements, warn, annonces, coach,
+    logs, defis, evenements, warn, annonces, coach, boosts,
   };
 
   try {
