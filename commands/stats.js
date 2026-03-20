@@ -71,8 +71,9 @@ module.exports = {
         const summoner = summonerRes.data;
 
         // Récupère le rang
+        console.log('Summoner ID:', summoner.id);
         const rankRes = await fetchJSON(
-          `https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/${summoner.id}?api_key=${apiKey}`
+          `https://euw1.api.riotgames.com/lol/league/v4/entries/by-puuid/${puuid}?api_key=${apiKey}`
         );
 
         const embed = new EmbedBuilder()
